@@ -9,9 +9,10 @@ import subprocess
 # This is how Hazel passes in the file path
 hazelFilePath = sys.argv[1]
 
+
 # Obviously, you'll need your own keys
-aws_key = 'AKIAJV5SEVMD7CXK2QSA'
-aws_secret = 'Dx0e4yDdav/g7blc3jIuBToq8ybkUdv+Te36P/3U'
+aws_key = sys.argv[2]
+aws_secret = sys.argv[3]
 
 # This is where I store my log file for these links. It's a Dropbox file in my NVAlt notes folder
 logFilePath = "/Users/ygilad/Dropbox/Notes/Linkin_Logs.txt"
