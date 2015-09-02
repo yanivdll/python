@@ -6,10 +6,10 @@ import pyperclip, re
 text = str(pyperclip.paste())
 
 #regex definitions for reapeated spaces
-repeatSpacesRegex = re.compile(r'\b(\s)+\1+\b') 
+repeatSpacesRegex = re.compile(r'\b(\s)+\1+\b', 'm') 
 
 #regex definitions for reapeated words
-repeatWordsRegex = re.compile(r'\b((\w+)\s+)\1\b', re.IGNORECASE)
+repeatWordsRegex = re.compile(r'\b((\w+)\s+)\1\b', re.IGNORECASE|re.DOTALL)
 
 #remove the extra spaces
 repeatSpces = repeatSpacesRegex.findall(text)
