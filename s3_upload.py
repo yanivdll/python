@@ -12,7 +12,7 @@ logging.basicConfig(filename='/Users/ygilad/Library/Logs/Python/myPythonLogs.log
 
 
 # Use to bypass bash arguments, when testing in IDLE
-sys.argv = ['s3_uplaod.py','/User/ygilad/dev/save_to_zotero_and_pinboard.js', 'image',]
+# sys.argv = ['s3_uplaod.py','/User/ygilad/dev/save_to_zotero_and_pinboard.js', 'image',]
 
 # This is how Hazel passes in the file path
 hazelFilePath = sys.argv[1]
@@ -52,7 +52,7 @@ def uploadToS3(localFilePath, localFileType, S3Bucket):
     logfile = open(logFilePath, "a")
     
     # Create the URL for the image
-    imageLink = S3Bucket + '/' + key.name
+    imageLink = 'https://' + S3Bucket + '/' + key.name
     logging.debug(imageLink)
 
     try:
