@@ -1,3 +1,11 @@
+# Source: https://gist.github.com/najibninaba/5062153
+# 
+# This script upload files (at the moment images and slideshows) to S3. 
+#
+# Credits:
+# This script is inspired by macdrifter script, which can be found at  http://www.macdrifter.com/2012/05/upload-to-amazon-s3-from-dropbox-using-hazel.html
+#
+
 import boto
 from boto.s3.connection import S3Connection
 import pyperclip
@@ -5,22 +13,12 @@ import os
 import sys
 from datetime import date, datetime
 
-# Log handling
-import logging
-logging.disable(logging.CRITICAL)
-logging.basicConfig(filename='/Users/ygilad/Library/Logs/Python/myPythonLogs.log', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
-
-
-# Use to bypass bash arguments, when testing in IDLE
-# sys.argv = ['s3_uplaod.py','/User/ygilad/dev/save_to_zotero_and_pinboard.js', 'image',]
-
 # This is how Hazel passes in the file path
 hazelFilePath = sys.argv[1]
 contentType = sys.argv[2]
-logging.debug(hazelFilePath)
 
 # This is where I store my log file for these links. It's a Dropbox file in my NVAlt notes folder
-logFilePath = "/Users/ygilad/Dropbox/Notes/Linkin_Logs.txt"
+logFilePath = "~/Dropbox/Notes/Linkin_Logs.txt"
 nowTime = str(datetime.now())
 
 
@@ -32,7 +30,6 @@ def uploadToS3(localFilePath, localFileType, S3Bucket):
     # Determine the current month and year to create the upload path
     today = date.today()
     datePath = today.strftime("/%Y/%m/")
-    logging.debug(datePath)
 
     # Connect to S3
     s3 = boto.connect_s3()
@@ -52,8 +49,7 @@ def uploadToS3(localFilePath, localFileType, S3Bucket):
     logfile = open(logFilePath, "a")
     
     # Create the URL for the image
-    imageLink = 'https://' + S3Bucket + '/' + key.name
-    logging.debug(imageLink)
+    imageLink = 'http://' + S3Bucket + '/' + key.name
 
     try:
         # %% encode the file name and append the URL to the log file
